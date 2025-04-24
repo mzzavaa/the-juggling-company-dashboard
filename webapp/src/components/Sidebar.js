@@ -18,7 +18,8 @@ import {
   Psychology as ReflectionIcon,
   EmojiEvents as AchievementsIcon,
   Groups as TeamIcon,
-  Help as HelpIcon
+  Help as HelpIcon,
+  Article as NewsIcon
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
@@ -55,6 +56,11 @@ export default function Sidebar() {
       text: 'Reflections',
       icon: <ReflectionIcon />,
       path: '/reflection/latest'
+    },
+    {
+      text: 'News',
+      icon: <NewsIcon />,
+      path: '/news'
     },
     {
       text: 'Achievements',

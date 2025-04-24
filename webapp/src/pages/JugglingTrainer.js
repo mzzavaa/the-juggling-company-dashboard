@@ -432,8 +432,8 @@ export default function JugglingTrainer() {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={`https://source.unsplash.com/random/300x200?juggling&sig=${item}`}
-                      alt="Practice session"
+                      image={require(`../assets/practice${item}.png`)}
+                      alt={`Practice session ${item}`}
                     />
                     <CardContent>
                       <Typography variant="subtitle1" gutterBottom>

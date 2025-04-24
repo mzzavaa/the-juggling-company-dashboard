@@ -17,6 +17,8 @@ import Profile from './pages/Profile';
 import Team from './pages/Team';
 import Achievements from './pages/Achievements';
 import Help from './pages/Help';
+import News from './pages/News';
+import NewsDetail from './pages/NewsDetail';
 import NotFound from './pages/NotFound';
 
 // Components
@@ -86,6 +88,8 @@ function App() {
             <Route path="team" element={<Team />} />
             <Route path="achievements" element={<Achievements />} />
             <Route path="help" element={<Help />} />
+            <Route path="news" element={<News />} />
+            <Route path="news/:slug" element={<NewsDetail />} />
           </Route>
           
           <Route path="*" element={<NotFound />} />

@@ -9,7 +9,6 @@ import {
   Tab, 
   Card, 
   CardContent, 
-  CardMedia,
   List,
   ListItem,
   ListItemIcon,
@@ -20,7 +19,8 @@ import {
   CircularProgress,
   Chip,
   IconButton,
-  Tooltip
+  Tooltip,
+  useTheme
 } from '@mui/material';
 import { 
   Code as CodeIcon,
@@ -33,10 +33,13 @@ import {
   Save as SaveIcon,
   ContentCopy as CopyIcon,
   ArrowBack as BackIcon,
-  Help as HelpIcon
+  Help as HelpIcon,
+  GitHub as GitHubIcon,
+  Link as LinkIcon
 } from '@mui/icons-material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useUserProgress } from '../context/UserProgressContext';
+import GitHubRepoViewer from '../components/GitHubRepoViewer';
 
 // Mock code snippets for different modules
 const codeSnippets = {
@@ -238,6 +241,10 @@ export default function TechProject() {
   const navigate = useNavigate();
   const userProgress = useUserProgress();
   
+  // Add theme for dark mode support
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
+  
   const [module, setModule] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -247,6 +254,8 @@ export default function TechProject() {
   const [runOutput, setRunOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [saved, setSaved] = useState(true);
+  const [githubUrl, setGithubUrl] = useState('');
+  const [isGithubLinked, setIsGithubLinked] = useState(false);
   
   useEffect(() => {
     const loadProject = async () => {
@@ -375,6 +384,22 @@ Execution completed successfully in 3.2s
     setRunOutput('Code copied to clipboard.');
   };
   
+  const handleLinkGithub = () => {
+    setIsGithubLinked(true);
+  };
+  
+  const handleCodeFromGithub = (code) => {
+    if (!saved) {
+      if (window.confirm('You have unsaved changes. Use GitHub code anyway?')) {
+        setProjectCode(code);
+        setSaved(false);
+      }
+    } else {
+      setProjectCode(code);
+      setSaved(false);
+    }
+  };
+  
   const renderArchitectureDiagram = () => (
     <Box sx={{ textAlign: 'center', py: 3 }}>
       <Typography variant="subtitle1" gutterBottom>
@@ -476,6 +501,7 @@ Execution completed successfully in 3.2s
           variant="fullWidth"
         >
           <Tab icon={<CodeIcon />} label="Code" />
+          <Tab icon={<GitHubIcon />} label="GitHub" />
           <Tab icon={<ArchitectureIcon />} label="Architecture" />
           <Tab icon={<CloudIcon />} label="Resources" />
         </Tabs>
@@ -519,7 +545,8 @@ Execution completed successfully in 3.2s
                   style: { 
                     fontFamily: 'monospace', 
                     fontSize: '0.9rem',
-                    backgroundColor: '#f5f5f5'
+                    backgroundColor: isDarkMode ? '#1a1a1a' : '#f5f5f5',
+                    color: isDarkMode ? '#e0e0e0' : 'inherit'
                   }
                 }}
               />
@@ -597,6 +624,15 @@ Execution completed successfully in 3.2s
       
       {activeTab === 1 && (
         <Paper sx={{ p: 3 }}>
+          <GitHubRepoViewer 
+            repoUrl={githubUrl} 
+            onCodeSelect={handleCodeFromGithub} 
+          />
+        </Paper>
+      )}
+      
+      {activeTab === 2 && (
+        <Paper sx={{ p: 3 }}>
           {renderArchitectureDiagram()}
           
           <Divider sx={{ my: 3 }} />
@@ -636,7 +672,7 @@ Execution completed successfully in 3.2s
         </Paper>
       )}
       
-      {activeTab === 2 && (
+      {activeTab === 3 && (
         <Paper sx={{ p: 3 }}>
           <Typography variant="h6" gutterBottom>
             AWS Resources
