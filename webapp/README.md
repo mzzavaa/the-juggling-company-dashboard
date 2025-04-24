@@ -1,127 +1,128 @@
 # The Juggling Company Dashboard
 
-Welcome to **The Juggling Company Dashboard**! This is a React-based web application designed to manage and visualize data for juggling-related activities. The dashboard provides an intuitive interface for tracking performance, managing schedules, and analyzing statistics.
-
----
+A web application for tracking juggling progress and learning technical skills.
 
 ## Features
 
-- **Modern UI**: Built with React and styled-components for a sleek and responsive design.
-- **Data Visualization**: Interactive charts and graphs powered by libraries like Chart.js or Recharts.
-- **State Management**: Efficient state handling using React Context or Redux.
-- **API Integration**: Fetch and display data from backend services.
-- **Customizable**: Easily extendable to fit your specific needs.
-
----
-
-## Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (v16 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-
----
+- Track juggling practice sessions
+- Learn technical skills through guided projects
+- Reflect on your learning journey
+- Earn achievements
+- Stay updated with news and blog posts
 
 ## Getting Started
 
-Follow these steps to set up and run the project locally:
+### Prerequisites
 
-### 1. Clone the Repository
+- Node.js (v14 or higher)
+- npm or yarn
 
+### Installation
+
+1. Clone the repository
 ```bash
 git clone https://github.com/your-username/the-juggling-company-dashboard.git
 cd the-juggling-company-dashboard/webapp
 ```
 
-### 2. Install Dependencies
-
-Using npm:
-
+2. Install dependencies
 ```bash
 npm install
-```
-
-Or using yarn:
-
-```bash
+# or
 yarn install
 ```
 
-### 3. Start the Development Server
-
-Using npm:
-
+3. Start the development server
 ```bash
 npm start
-```
-
-Or using yarn:
-
-```bash
+# or
 yarn start
 ```
 
-The application will be available at `http://localhost:3000`.
+## Project Structure
 
----
+- `/src/components` - Reusable UI components
+- `/src/pages` - Page components
+- `/src/context` - React context providers
+- `/src/data` - Mock data for development
+- `/src/utils` - Utility functions
 
-## Building for Production
+## 🖌 Colour palette & theming
 
-To create a production build, run:
+The application uses a custom color palette themed around the three main juggling topics:
 
-Using npm:
+- **Juggling & Technology**: Blue (`#2f6398`)
+- **Juggling & Change**: Green (`#3ea075`)
+- **Juggling & Your Brain**: Red (`#b74047`)
+- **Neutral highlights**: Sand (`#e2c293`)
 
-```bash
-npm run build
+### How to use the colors
+
+#### In Tailwind CSS
+
+The colors are available as Tailwind classes:
+
+```jsx
+<div className="bg-tj-blue text-white">Juggling & Technology</div>
+<div className="bg-tj-green text-white">Juggling & Change</div>
+<div className="bg-tj-red text-white">Juggling & Your Brain</div>
+<div className="bg-tj-sand text-gray-800">Neutral highlight</div>
 ```
 
-Or using yarn:
+#### In CSS
 
-```bash
-yarn build
+The colors are also available as CSS variables:
+
+```css
+.my-element {
+  background-color: var(--tj-blue);
+  color: white;
+}
 ```
 
-The optimized build will be available in the `build` directory.
+#### In Material UI
 
----
+The colors are mapped to Material UI's theme:
 
-## Folder Structure
+- `primary.main` = tj-blue
+- `secondary.main` = tj-green
+- `error.main` = tj-red
+- `background.sand` = tj-sand
 
+```jsx
+<Button color="primary">Blue Button</Button>
+<Button color="secondary">Green Button</Button>
+<Button color="error">Red Button</Button>
 ```
-/src
-    /components    # Reusable React components
-    /pages         # Application pages
-    /hooks         # Custom React hooks
-    /utils         # Utility functions
-    /assets        # Static assets (images, icons, etc.)
+
+### Adding new categories
+
+To add a new category with its own color:
+
+1. Add the color to `src/index.css`:
+```css
+:root {
+  /* Existing colors */
+  --tj-purple: #8a4fff; /* New category */
+}
 ```
 
----
+2. Add the color to `tailwind.config.js`:
+```js
+theme: {
+  extend: {
+    colors: {
+      tj: {
+        // Existing colors
+        purple: '#8a4fff', // New category
+      },
+    },
+  },
+},
+```
 
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch: `git checkout -b feature/your-feature-name`.
-3. Commit your changes: `git commit -m "Add your message here"`.
-4. Push to the branch: `git push origin feature/your-feature-name`.
-5. Open a pull request.
-
----
+3. Update the `getCategoryColor` function in `NewsCard.js` to include the new category.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Contact
-
-For questions or feedback, please reach out to:
-
-- **Email**: support@jugglingcompany.com
-- **GitHub Issues**: [Issue Tracker](https://github.com/your-username/the-juggling-company-dashboard/issues)
-
-Happy juggling! 🎉
+This project is licensed under the MIT License - see the LICENSE file for details.
