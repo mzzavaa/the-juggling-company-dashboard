@@ -1,0 +1,8 @@
+{
+  "id": "user-123",
+  "name": "Demo User",
+  "email": "demo@example.com",
+  "avatar": "https://i.pravatar.cc/300",
+  "learningStyle": "Reflector",
+  "level": 7
+}

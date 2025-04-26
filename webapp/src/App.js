@@ -1,99 +1,67 @@
-import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Box, CircularProgress } from '@mui/material';
-
-// Context
+import Dashboard from './pages/Dashboard';
+import ModulesPage from './pages/ModulesPage';
+import ModuleDetailPage from './pages/ModuleDetailPage';
+import PracticePage from './pages/PracticePage';
+import NewsPage from './pages/NewsPage';
+import NewsDetailPage from './pages/NewsDetailPage';
+import { Alert, Box } from '@mui/material';
 import { AuthProvider } from './context/AuthContext';
 import { UserProgressProvider } from './context/UserProgressContext';
+import config from './config';
+import userData from './data/user.json';
 
-// Pages
-import Dashboard from './pages/Dashboard';
-import LearningLab from './pages/LearningLab';
-import ModuleView from './pages/ModuleView';
-import JugglingTrainer from './pages/JugglingTrainer';
-import TechProject from './pages/TechProject';
-import Reflection from './pages/Reflection';
-import Profile from './pages/Profile';
-import Team from './pages/Team';
-import Achievements from './pages/Achievements';
-import Help from './pages/Help';
-import News from './pages/News';
-import NewsDetail from './pages/NewsDetail';
-import NotFound from './pages/NotFound';
-
-// Components
-import Layout from './components/Layout';
-import ProtectedRoute from './components/ProtectedRoute';
-
-// Mock authentication for development
-const mockAuth = {
-  isAuthenticated: true,
-  user: {
-    id: 'user-123',
-    name: 'Test User',
-    email: 'test@example.com',
-    avatar: 'https://i.pravatar.cc/300',
-    learningStyle: 'Reflector',
-    level: 7
-  }
-};
-
+/**
+ * Main App component
+ */
 function App() {
-  const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Simulate authentication check
-    setTimeout(() => {
-      setAuthenticated(mockAuth.isAuthenticated);
-      setUser(mockAuth.user);
-      setLoading(false);
-    }, 1000);
-  }, []);
-
-  if (loading) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          bgcolor: 'background.default'
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
-
+  console.log('App environment:', config.app.environment);
+  
   return (
-    <AuthProvider initialState={{ authenticated, user }}>
+    <AuthProvider>
       <UserProgressProvider>
-        <Routes>
-          <Route path="/" element={
-            <ProtectedRoute>
-              <Layout />
-            </ProtectedRoute>
-          }>
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="juggling-trainer" element={<JugglingTrainer />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="learning-lab" element={<LearningLab />} />
-            <Route path="modules/:moduleId" element={<ModuleView />} />
-            <Route path="tech-project/:projectId" element={<TechProject />} />
-            <Route path="reflection/:moduleId" element={<Reflection />} />
-            <Route path="team" element={<Team />} />
-            <Route path="achievements" element={<Achievements />} />
-            <Route path="help" element={<Help />} />
-            <Route path="news" element={<News />} />
-            <Route path="news/:slug" element={<NewsDetail />} />
-          </Route>
+        <div className="app-container">
+          <header className="app-header">
+            <div className="logo">
+              <h1>{config.app.name}</h1>
+            </div>
+            <nav className="main-nav">
+              <ul>
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/modules">Modules</a></li>
+                <li><a href="/practice">Practice</a></li>
+                <li><a href="/news">News</a></li>
+              </ul>
+            </nav>
+            <div className="user-menu">
+              <span className="user-greeting">Welcome, {userData.name}!</span>
+            </div>
+          </header>
           
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+          <main className="app-content">
+            {/* Demo mode alert */}
+            <Box sx={{ mb: 3, mx: 3 }}>
+              <Alert severity="warning">
+                <strong>Demo Mode - No Backend Connection</strong> - This is a read-only dashboard displaying data from JSON files. No data can be entered or saved.
+              </Alert>
+            </Box>
+            
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/modules" element={<ModulesPage />} />
+              <Route path="/module/:moduleId" element={<ModuleDetailPage />} />
+              <Route path="/practice" element={<PracticePage />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/news/:newsId" element={<NewsDetailPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+          
+          <footer className="app-footer">
+            <p>&copy; 2025 The Juggling Company. All rights reserved.</p>
+            <p>Version: {config.app.version} | Environment: Demo</p>
+          </footer>
+        </div>
       </UserProgressProvider>
     </AuthProvider>
   );

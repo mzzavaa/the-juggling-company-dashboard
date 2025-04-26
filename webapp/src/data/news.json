@@ -1,0 +1,29 @@
+[
+  {
+    "id": "news-1",
+    "title": "Juggling and Your Brain",
+    "date": "2025-04-25",
+    "category": "Research",
+    "imageKey": "jugglingAndBrain",
+    "summary": "Discover how juggling creates new neural pathways and improves cognitive function.",
+    "content": "Juggling isn't just a fun skill to learn—it's also a powerful way to develop your brain. Research has shown that learning to juggle actually creates new neural pathways and increases gray matter in areas of the brain associated with visual and motor activity. When you learn to juggle, you're not just training your hands; you're training your brain to process multiple objects in motion, predict trajectories, and coordinate complex movements. This type of activity engages both hemispheres of your brain simultaneously, improving communication between them. The benefits extend beyond just better coordination—regular juggling practice has been linked to improved focus, enhanced spatial awareness, and even better problem-solving abilities. So next time you pick up those juggling balls, remember: you're not just entertaining yourself, you're giving your brain a comprehensive workout!"
+  },
+  {
+    "id": "news-2",
+    "title": "Juggling and Change",
+    "date": "2025-04-22",
+    "category": "Insights",
+    "imageKey": "jugglingAndChange",
+    "summary": "Learn how juggling can teach us valuable lessons about managing change in our lives and careers.",
+    "content": "Juggling serves as a perfect metaphor for how we handle change in our lives. When you're juggling, you're constantly letting go and catching again—nothing stays still, and that's exactly the point. This mirrors how we need to approach change: with open hands, ready to release what's no longer serving us and catch new opportunities. The process of learning to juggle teaches patience and persistence. You drop the balls countless times before developing a consistent pattern. Similarly, adapting to change requires us to embrace failure as part of the learning process. Juggling also teaches us about focus and presence. When juggling, your attention can't wander—you must be fully present with the objects in motion. This same focused presence helps us navigate periods of change without becoming overwhelmed. Perhaps most importantly, juggling shows us that we can handle more than we think. What seems impossible at first becomes natural with practice, just as we grow more comfortable with change the more we experience it."
+  },
+  {
+    "id": "news-3",
+    "title": "Juggling and Technology",
+    "date": "2025-04-18",
+    "category": "Tech",
+    "imageKey": "jugglingAndTechnology",
+    "summary": "Explore the fascinating parallels between juggling patterns and modern technology concepts.",
+    "content": "The connections between juggling and technology run deeper than you might think. At its core, juggling is about patterns, timing, and managing multiple objects in motion—concepts that have direct parallels in computing. Consider the classic three-ball cascade pattern: each ball follows a predictable trajectory, with precise timing ensuring they don't collide. This is remarkably similar to how processes are scheduled in a computer's operating system, with the CPU juggling multiple tasks through time-slicing algorithms. Juggling patterns like multiplexing (where multiple balls are thrown or caught simultaneously) mirror networking concepts where data packets are bundled and transmitted together. Even juggling notation systems like Siteswap bear striking similarities to programming languages, using numbers to represent throw heights and create complex patterns through simple notation. As we advance into more complex technologies like distributed systems, the juggling metaphor becomes even more apt—both require coordination across multiple points, graceful handling of failures, and the ability to maintain overall system stability despite constant movement and change."
+  }
+]

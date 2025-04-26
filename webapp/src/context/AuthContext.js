@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
+// Import user data from JSON
+import userData from '../data/user.json';
 
 const AuthContext = createContext();
 
@@ -6,31 +8,23 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
-export function AuthProvider({ children, initialState = { authenticated: false, user: null } }) {
+// Default to authenticated with the user from JSON
+export function AuthProvider({ children, initialState = { authenticated: true, user: userData } }) {
   const [authenticated, setAuthenticated] = useState(initialState.authenticated);
   const [user, setUser] = useState(initialState.user);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Login function
+  // Login function - mock implementation for demo
   const login = async (email, password) => {
     setLoading(true);
     setError(null);
     
     try {
-      // In a real app, this would call an API or Auth service
-      // For now, we'll simulate a successful login
+      // Simulate a successful login
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const userData = {
-        id: 'user-123',
-        name: 'Test User',
-        email: email,
-        avatar: 'https://i.pravatar.cc/300',
-        learningStyle: 'Reflector',
-        level: 7
-      };
-      
+      // Use the user data from JSON
       setAuthenticated(true);
       setUser(userData);
       setLoading(false);
@@ -42,27 +36,25 @@ export function AuthProvider({ children, initialState = { authenticated: false, 
     }
   };
 
-  // Register function
+  // Register function - mock implementation for demo
   const register = async (name, email, password, learningStyle) => {
     setLoading(true);
     setError(null);
     
     try {
-      // In a real app, this would call an API or Auth service
-      // For now, we'll simulate a successful registration
+      // Simulate a successful registration
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      const userData = {
-        id: 'user-' + Math.floor(Math.random() * 1000),
+      // Use the user data from JSON but update some fields
+      const newUser = {
+        ...userData,
         name: name,
         email: email,
-        avatar: 'https://i.pravatar.cc/300',
-        learningStyle: learningStyle,
-        level: 1
+        learningStyle: learningStyle
       };
       
       setAuthenticated(true);
-      setUser(userData);
+      setUser(newUser);
       setLoading(false);
       return true;
     } catch (err) {
@@ -72,16 +64,17 @@ export function AuthProvider({ children, initialState = { authenticated: false, 
     }
   };
 
-  // Logout function
+  // Logout function - mock implementation for demo
   const logout = async () => {
     setLoading(true);
     
     try {
-      // In a real app, this would call an API or Auth service
+      // Simulate logout
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      setAuthenticated(false);
-      setUser(null);
+      // Reset to initial state after logout
+      setAuthenticated(true);
+      setUser(userData);
       setLoading(false);
       return true;
     } catch (err) {
@@ -91,18 +84,18 @@ export function AuthProvider({ children, initialState = { authenticated: false, 
     }
   };
 
-  // Update user profile
-  const updateProfile = async (userData) => {
+  // Update user profile - mock implementation for demo
+  const updateProfile = async (updatedData) => {
     setLoading(true);
     setError(null);
     
     try {
-      // In a real app, this would call an API
+      // Simulate profile update
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setUser(prevUser => ({
         ...prevUser,
-        ...userData
+        ...updatedData
       }));
       
       setLoading(false);

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "session-1",
+    "date": "2025-04-15",
+    "propType": "balls",
+    "duration": 15,
+    "imageKey": "practice1",
+    "metrics": {
+      "longestStreak": 25,
+      "drops": 12,
+      "catches": 87
+    }
+  },
+  {
+    "id": "session-2",
+    "date": "2025-04-16",
+    "propType": "balls",
+    "duration": 20,
+    "imageKey": "practice2",
+    "metrics": {
+      "longestStreak": 35,
+      "drops": 8,
+      "catches": 112
+    }
+  },
+  {
+    "id": "session-3",
+    "date": "2025-04-20",
+    "propType": "rings",
+    "duration": 15,
+    "imageKey": "practice3",
+    "metrics": {
+      "longestStreak": 12,
+      "drops": 18,
+      "catches": 64
+    }
+  }
+]

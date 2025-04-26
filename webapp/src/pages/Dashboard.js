@@ -15,7 +15,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
+  CardMedia
 } from '@mui/material';
 import { 
   SportsGymnastics as JugglingIcon,
@@ -24,19 +25,18 @@ import {
   EmojiEvents as AchievementsIcon,
   ArrowForward as ArrowIcon,
   AccessTime as TimeIcon,
-  Article as NewsIcon
+  Article as NewsIcon,
+  TrendingUp as TrendingUpIcon
 } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useUserProgress } from '../context/UserProgressContext';
-import NewsSection from '../components/NewsSection';
+import newsData from '../data/news.json';
+import images from '../assets';
 
 export default function Dashboard() {
-  const navigate = useNavigate();
   const { user } = useAuth();
   const { modules, achievements, practiceSessions, loading, error } = useUserProgress();
-  
-  console.log('Dashboard rendering:', { user, modules, achievements, practiceSessions, loading, error });
   
   // Get active module
   const activeModule = modules?.find(module => module.status === 'in-progress');
@@ -57,20 +57,19 @@ export default function Dashboard() {
   const totalModules = modules.length;
   const overallProgress = Math.round((completedModules / totalModules) * 100);
   
+  // Get latest news
+  const latestNews = newsData.slice(0, 2);
+  
+  if (loading) {
+    return <Box sx={{ p: 3 }}><Typography>Loading dashboard data...</Typography></Box>;
+  }
+  
   return (
-    <Box>
+    <Box sx={{ p: 3 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4">
           Welcome back, {user?.name.split(' ')[0]}!
         </Typography>
-        <Button 
-          variant="contained" 
-          endIcon={<ArrowIcon />}
-          onClick={() => navigate('/learning-lab')}
-          sx={{ bgcolor: 'primary.main' }}
-        >
-          Enter Learning Lab
-        </Button>
       </Box>
       
       <Grid container spacing={3}>
@@ -92,10 +91,7 @@ export default function Dashboard() {
                       mr: 2
                     }}
                   >
-                    {activeModule.jugglingProp === 'balls' && <JugglingIcon />}
-                    {activeModule.jugglingProp === 'rings' && <JugglingIcon />}
-                    {activeModule.jugglingProp === 'flower-stick' && <JugglingIcon />}
-                    {activeModule.jugglingProp === 'clubs' && <JugglingIcon />}
+                    <JugglingIcon />
                   </Avatar>
                   <Box sx={{ flexGrow: 1 }}>
                     <Typography variant="h5" gutterBottom>
@@ -148,13 +144,15 @@ export default function Dashboard() {
                 <Box sx={{ display: 'flex', gap: 2 }}>
                   <Button 
                     variant="contained" 
-                    onClick={() => navigate(`/modules/${activeModule.id}`)}
+                    component={Link}
+                    to={`/module/${activeModule.id}`}
                   >
                     Continue Module
                   </Button>
                   <Button 
                     variant="outlined" 
-                    onClick={() => navigate('/juggling-trainer')}
+                    component={Link}
+                    to="/practice"
                   >
                     Practice Juggling
                   </Button>
@@ -167,7 +165,8 @@ export default function Dashboard() {
                 </Typography>
                 <Button 
                   variant="contained" 
-                  onClick={() => navigate('/learning-lab')}
+                  component={Link}
+                  to="/modules"
                   sx={{ mt: 2 }}
                 >
                   Choose Module
@@ -267,10 +266,11 @@ export default function Dashboard() {
             <Button 
               variant="outlined" 
               fullWidth 
+              component={Link}
+              to="/modules"
               sx={{ mt: 2 }}
-              onClick={() => navigate('/profile')}
             >
-              View Full Profile
+              View All Modules
             </Button>
           </Paper>
         </Grid>
@@ -280,11 +280,11 @@ export default function Dashboard() {
           <Grid container spacing={2}>
             <Grid item xs={6} sm={3}>
               <Card>
-                <CardActionArea onClick={() => navigate('/juggling-trainer')}>
+                <CardActionArea component={Link} to="/practice">
                   <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                    <JugglingIcon sx={{ fontSize: 40, color: 'var(--tj-blue)', mb: 1 }} />
+                    <JugglingIcon sx={{ fontSize: 40, color: 'primary.main', mb: 1 }} />
                     <Typography variant="subtitle1">
-                      Juggling Trainer
+                      Juggling Practice
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -292,11 +292,11 @@ export default function Dashboard() {
             </Grid>
             <Grid item xs={6} sm={3}>
               <Card>
-                <CardActionArea onClick={() => navigate('/tech-project/latest')}>
+                <CardActionArea component={Link} to="/modules">
                   <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                    <CodeIcon sx={{ fontSize: 40, color: 'var(--tj-green)', mb: 1 }} />
+                    <CodeIcon sx={{ fontSize: 40, color: 'secondary.main', mb: 1 }} />
                     <Typography variant="subtitle1">
-                      Tech Project
+                      Tech Modules
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -304,11 +304,11 @@ export default function Dashboard() {
             </Grid>
             <Grid item xs={6} sm={3}>
               <Card>
-                <CardActionArea onClick={() => navigate('/reflection/latest')}>
+                <CardActionArea component={Link} to="/news">
                   <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                    <ReflectionIcon sx={{ fontSize: 40, color: 'var(--tj-red)', mb: 1 }} />
+                    <NewsIcon sx={{ fontSize: 40, color: 'info.main', mb: 1 }} />
                     <Typography variant="subtitle1">
-                      Reflection
+                      News & Articles
                     </Typography>
                   </CardContent>
                 </CardActionArea>
@@ -316,9 +316,9 @@ export default function Dashboard() {
             </Grid>
             <Grid item xs={6} sm={3}>
               <Card>
-                <CardActionArea onClick={() => navigate('/achievements')}>
+                <CardActionArea component={Link} to="/modules">
                   <CardContent sx={{ textAlign: 'center', py: 3 }}>
-                    <AchievementsIcon sx={{ fontSize: 40, color: 'var(--tj-sand)', mb: 1 }} />
+                    <AchievementsIcon sx={{ fontSize: 40, color: 'success.main', mb: 1 }} />
                     <Typography variant="subtitle1">
                       Achievements
                     </Typography>
@@ -340,12 +340,18 @@ export default function Dashboard() {
               <List>
                 {recentAchievements.map((achievement) => (
                   <React.Fragment key={achievement.id}>
-                    <ListItem>
-                      <ListItemIcon>
+                    <ListItem sx={{ 
+                      py: 1.5,
+                      '& .MuiListItemText-root': {
+                        color: 'text.primary',
+                        ml: 2
+                      }
+                    }}>
+                      <ListItemIcon sx={{ minWidth: 'auto' }}>
                         <Avatar sx={{ 
-                          bgcolor: achievement.category === 'juggling' ? 'var(--tj-blue)' : 
-                                  achievement.category === 'technical' ? 'var(--tj-green)' : 
-                                  'var(--tj-red)' 
+                          bgcolor: achievement.category === 'juggling' ? 'primary.main' : 
+                                  achievement.category === 'technical' ? 'secondary.main' : 
+                                  'info.main' 
                         }}>
                           {achievement.category === 'juggling' ? <JugglingIcon /> : 
                            achievement.category === 'technical' ? <CodeIcon /> : 
@@ -355,6 +361,7 @@ export default function Dashboard() {
                       <ListItemText 
                         primary={achievement.title}
                         secondary={achievement.description}
+                        primaryTypographyProps={{ fontWeight: 'medium' }}
                       />
                       <Chip 
                         label={achievement.dateEarned} 
@@ -371,15 +378,6 @@ export default function Dashboard() {
                 No achievements yet. Start completing modules to earn them!
               </Typography>
             )}
-            
-            <Button 
-              variant="text" 
-              endIcon={<ArrowIcon />}
-              onClick={() => navigate('/achievements')}
-              sx={{ mt: 1 }}
-            >
-              View All Achievements
-            </Button>
           </Paper>
         </Grid>
         
@@ -394,22 +392,58 @@ export default function Dashboard() {
               <List>
                 {recentPracticeSessions.map((session) => (
                   <React.Fragment key={session.id}>
-                    <ListItem>
-                      <ListItemIcon>
-                        <Avatar sx={{ bgcolor: 'primary.main' }}>
-                          <JugglingIcon />
+                    <ListItem 
+                      component={Link} 
+                      to="/practice" 
+                      sx={{ 
+                        textDecoration: 'none', 
+                        color: 'inherit',
+                        py: 1.5,
+                        '&:hover': {
+                          bgcolor: 'action.hover',
+                          borderRadius: 1
+                        },
+                        '& .MuiListItemText-root': {
+                          color: 'text.primary',
+                          ml: 2
+                        }
+                      }}
+                    >
+                      <ListItemIcon sx={{ minWidth: 'auto' }}>
+                        <Avatar 
+                          variant="rounded"
+                          sx={{ 
+                            width: 60, 
+                            height: 60, 
+                            borderRadius: 1,
+                            overflow: 'hidden'
+                          }}
+                        >
+                          <img 
+                            src={images[session.imageKey]} 
+                            alt={session.propType}
+                            style={{ 
+                              width: '100%', 
+                              height: '100%', 
+                              objectFit: 'cover' 
+                            }}
+                          />
                         </Avatar>
                       </ListItemIcon>
                       <ListItemText 
                         primary={`${session.propType} - ${session.duration} minutes`}
-                        secondary={new Date(session.date).toLocaleDateString()}
+                        secondary={session.date}
+                        primaryTypographyProps={{ fontWeight: 'medium' }}
                       />
                       <Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+                          <TrendingUpIcon sx={{ color: 'success.main', fontSize: 16, mr: 0.5 }} />
+                          <Typography variant="caption" display="block">
+                            Catches: {session.metrics.catches}
+                          </Typography>
+                        </Box>
                         <Typography variant="caption" display="block">
-                          Longest streak: {session.metrics.longestStreak}s
-                        </Typography>
-                        <Typography variant="caption" display="block">
-                          Drops: {session.metrics.drops}
+                          Streak: {session.metrics.longestStreak}s
                         </Typography>
                       </Box>
                     </ListItem>
@@ -426,17 +460,76 @@ export default function Dashboard() {
             <Button 
               variant="text" 
               endIcon={<ArrowIcon />}
-              onClick={() => navigate('/juggling-trainer')}
+              component={Link}
+              to="/practice"
               sx={{ mt: 1 }}
             >
               View All Practice Sessions
             </Button>
           </Paper>
         </Grid>
+        
+        {/* Latest News */}
+        <Grid item xs={12}>
+          <Paper sx={{ p: 3 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+              <Typography variant="h6">
+                Latest News & Articles
+              </Typography>
+              <Button 
+                variant="text" 
+                endIcon={<ArrowIcon />}
+                component={Link}
+                to="/news"
+              >
+                View All
+              </Button>
+            </Box>
+            
+            <Grid container spacing={2}>
+              {latestNews.map(item => (
+                <Grid item xs={12} md={6} key={item.id}>
+                  <Paper elevation={2} sx={{ borderRadius: 2, overflow: 'hidden' }}>
+                    <CardActionArea component={Link} to={`/news/${item.id}`}>
+                      <Box sx={{ height: 160, overflow: 'hidden' }}>
+                        <img 
+                          src={images[item.imageKey]} 
+                          alt={item.title}
+                          style={{ 
+                            width: '100%', 
+                            height: '100%', 
+                            objectFit: 'cover' 
+                          }}
+                        />
+                      </Box>
+                      <CardContent sx={{ p: 2 }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+                          <Chip label={item.category} size="small" />
+                          <Typography variant="caption" color="text.secondary">
+                            {item.date}
+                          </Typography>
+                        </Box>
+                        <Typography variant="h6" gutterBottom>
+                          {item.title}
+                        </Typography>
+                        <Typography variant="body2" sx={{ 
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          display: '-webkit-box',
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: 'vertical',
+                        }}>
+                          {item.summary}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Paper>
+                </Grid>
+              ))}
+            </Grid>
+          </Paper>
+        </Grid>
       </Grid>
-      
-      {/* News & Updates Section */}
-      <NewsSection />
     </Box>
   );
 }

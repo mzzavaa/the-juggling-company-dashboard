@@ -1,0 +1,70 @@
+[
+  {
+    "id": "module-1",
+    "name": "Balls - AI Foundations",
+    "description": "Learn the 3-ball cascade and AI basics with Amazon Bedrock",
+    "jugglingProp": "balls",
+    "techTheme": "AI Foundations",
+    "awsServices": ["Amazon Bedrock", "SageMaker Canvas"],
+    "ottoTieIn": "Q&A Agent basics",
+    "reflection": "Reflect on \"one-ball\" quick wins",
+    "timeEstimate": {
+      "tech": "1-2 hours",
+      "juggling": "1 week"
+    },
+    "status": "completed",
+    "progress": 100,
+    "unlocked": true
+  },
+  {
+    "id": "module-2",
+    "name": "Rings - MLOps Feedback Loops",
+    "description": "Master the 3-ring cascade and MLOps with SageMaker Pipelines",
+    "jugglingProp": "rings",
+    "techTheme": "MLOps / Feedback Loops",
+    "awsServices": ["SageMaker Pipelines", "Model Monitor"],
+    "ottoTieIn": "Update OTTO knowledge base",
+    "reflection": "Six Thinking Hats on feedback",
+    "timeEstimate": {
+      "tech": "3 hours",
+      "juggling": "1-2 weeks"
+    },
+    "status": "in-progress",
+    "progress": 45,
+    "unlocked": true
+  },
+  {
+    "id": "module-3",
+    "name": "Flower Stick - Managed Services",
+    "description": "Learn flower stick basics and serverless architecture",
+    "jugglingProp": "flower-stick",
+    "techTheme": "Managed Services",
+    "awsServices": ["AWS Lambda", "Amazon Rekognition", "Bedrock"],
+    "ottoTieIn": "Agenda Producer uses managed GenAI",
+    "reflection": "ROI chart on \"build vs buy\"",
+    "timeEstimate": {
+      "tech": "2 hours",
+      "juggling": "1 week"
+    },
+    "status": "locked",
+    "progress": 0,
+    "unlocked": false
+  },
+  {
+    "id": "module-4",
+    "name": "Clubs - Distributed Systems",
+    "description": "Master club juggling and event-driven architectures",
+    "jugglingProp": "clubs",
+    "techTheme": "Distributed / Event-Driven Systems",
+    "awsServices": ["SQS", "SNS", "Step Functions", "DynamoDB"],
+    "ottoTieIn": "Speaker Finder ↔ Agenda flow",
+    "reflection": "Chaos-test \"dropped club\"",
+    "timeEstimate": {
+      "tech": "3 hours",
+      "juggling": "2-3 weeks"
+    },
+    "status": "locked",
+    "progress": 0,
+    "unlocked": false
+  }
+]

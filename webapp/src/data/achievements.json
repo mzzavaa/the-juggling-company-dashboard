@@ -1,0 +1,33 @@
+[
+  {
+    "id": "achievement-1",
+    "title": "3-Ball Master",
+    "description": "Successfully juggle 3 balls for 30 seconds",
+    "category": "juggling",
+    "dateEarned": "2025-04-15",
+    "unlocked": true
+  },
+  {
+    "id": "achievement-2",
+    "title": "AI Apprentice",
+    "description": "Complete your first AI project with Amazon Bedrock",
+    "category": "technical",
+    "dateEarned": "2025-04-16",
+    "unlocked": true
+  },
+  {
+    "id": "achievement-3",
+    "title": "Ring Rookie",
+    "description": "Successfully juggle 3 rings for 10 seconds",
+    "category": "juggling",
+    "dateEarned": "2025-04-20",
+    "unlocked": true
+  },
+  {
+    "id": "achievement-4",
+    "title": "Pipeline Pioneer",
+    "description": "Deploy your first MLOps pipeline",
+    "category": "technical",
+    "unlocked": false
+  }
+]
