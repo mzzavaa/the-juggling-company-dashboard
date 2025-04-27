@@ -10,6 +10,18 @@
   --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Dark mode variables */
+.dark-mode {
+  --primary-color: #2980b9;
+  --secondary-color: #27ae60;
+  --accent-color: #c0392b;
+  --background-color: #121212;
+  --card-background: #1e1e1e;
+  --text-color: #f5f5f5;
+  --border-color: #333333;
+  --shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -21,6 +33,7 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* App layout */

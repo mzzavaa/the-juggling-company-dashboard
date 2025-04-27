@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import ModulesPage from './pages/ModulesPage';
 import ModuleDetailPage from './pages/ModuleDetailPage';
@@ -26,10 +26,10 @@ function Header() {
       </div>
       <nav className="main-nav">
         <ul>
-          <li><a href="/">Dashboard</a></li>
-          <li><a href="/modules">Modules</a></li>
-          <li><a href="/practice">Practice</a></li>
-          <li><a href="/news">News</a></li>
+          <li><Link to="/">Dashboard</Link></li>
+          <li><Link to="/modules">Modules</Link></li>
+          <li><Link to="/practice">Practice</Link></li>
+          <li><Link to="/news">News</Link></li>
         </ul>
       </nav>
       <div className="user-menu">
