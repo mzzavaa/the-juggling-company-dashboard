@@ -58,7 +58,7 @@ export default function Dashboard() {
   const overallProgress = Math.round((completedModules / totalModules) * 100);
   
   // Get latest news
-  const latestNews = newsData.slice(0, 2);
+  const latestNews = newsData.slice(0, 3);
   
   if (loading) {
     return <Box sx={{ p: 3 }}><Typography>Loading dashboard data...</Typography></Box>;
@@ -488,7 +488,7 @@ export default function Dashboard() {
             
             <Grid container spacing={2}>
               {latestNews.map(item => (
-                <Grid item xs={12} md={6} key={item.id}>
+                <Grid item xs={12} md={4} key={item.id}>
                   <Paper elevation={2} sx={{ borderRadius: 2, overflow: 'hidden' }}>
                     <CardActionArea component={Link} to={`/news/${item.id}`}>
                       <Box sx={{ height: 160, overflow: 'hidden' }}>
