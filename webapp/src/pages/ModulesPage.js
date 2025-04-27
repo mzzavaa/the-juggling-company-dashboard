@@ -18,6 +18,7 @@ import {
 import { Search as SearchIcon } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useUserProgress } from '../context/UserProgressContext';
+import { getRandomImageForCategory } from '../utils/imageUtils';
 
 export default function ModulesPage() {
   const { modules, loading } = useUserProgress();
@@ -102,7 +103,7 @@ export default function ModulesPage() {
                 <CardMedia
                   component="img"
                   height="140"
-                  image={`https://source.unsplash.com/random/400x200/?${module.jugglingProp},juggling`}
+                  image={getRandomImageForCategory('practice')}
                   alt={module.name}
                 />
                 <CardContent sx={{ flexGrow: 1 }}>

@@ -6,6 +6,7 @@ import {
   Button, 
   Card, 
   CardContent, 
+  CardMedia,
   Grid, 
   Chip, 
   LinearProgress,
@@ -23,6 +24,7 @@ import {
   Psychology as ReflectionIcon
 } from '@mui/icons-material';
 import { useUserProgress } from '../context/UserProgressContext';
+import { getRandomImageForCategory } from '../utils/imageUtils';
 
 export default function ModuleDetailPage() {
   const { moduleId } = useParams();
@@ -78,13 +80,18 @@ export default function ModuleDetailPage() {
         {/* Module header */}
         <Grid item xs={12}>
           <Paper sx={{ p: 3, mb: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <Box sx={{ mr: 2 }}>
-                <JugglingIcon sx={{ fontSize: 48, color: 'primary.main' }} />
+            <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: { md: 'center' }, mb: 2 }}>
+              <Box sx={{ mr: 2, mb: { xs: 2, md: 0 }, width: { xs: '100%', md: 'auto' }, maxWidth: { xs: '100%', md: 300 } }}>
+                <CardMedia
+                  component="img"
+                  sx={{ borderRadius: 1, maxHeight: 200, objectFit: 'cover' }}
+                  image={getRandomImageForCategory('practice')}
+                  alt={module.name}
+                />
               </Box>
               <Box sx={{ flexGrow: 1 }}>
                 <Typography variant="h4" gutterBottom>{module.name}</Typography>
-                <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+                <Box sx={{ display: 'flex', gap: 1, mb: 1, flexWrap: 'wrap' }}>
                   <Chip label={module.jugglingProp} color="primary" />
                   <Chip label={module.techTheme} color="secondary" />
                   <Chip 

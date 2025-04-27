@@ -5,11 +5,47 @@ import ModuleDetailPage from './pages/ModuleDetailPage';
 import PracticePage from './pages/PracticePage';
 import NewsPage from './pages/NewsPage';
 import NewsDetailPage from './pages/NewsDetailPage';
-import { Alert, Box } from '@mui/material';
+import { Alert, Box, IconButton } from '@mui/material';
+import { Brightness4, Brightness7 } from '@mui/icons-material';
 import { AuthProvider } from './context/AuthContext';
 import { UserProgressProvider } from './context/UserProgressContext';
+import { useThemeMode } from './context/ThemeContext';
 import config from './config';
 import userData from './data/user.json';
+
+/**
+ * Header component with theme toggle
+ */
+function Header() {
+  const { mode, toggleColorMode } = useThemeMode();
+  
+  return (
+    <header className="app-header">
+      <div className="logo">
+        <h1>{config.app.name}</h1>
+      </div>
+      <nav className="main-nav">
+        <ul>
+          <li><a href="/">Dashboard</a></li>
+          <li><a href="/modules">Modules</a></li>
+          <li><a href="/practice">Practice</a></li>
+          <li><a href="/news">News</a></li>
+        </ul>
+      </nav>
+      <div className="user-menu">
+        <IconButton 
+          onClick={toggleColorMode} 
+          color="inherit" 
+          aria-label="toggle theme"
+          sx={{ mr: 2 }}
+        >
+          {mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
+        </IconButton>
+        <span className="user-greeting">Welcome, {userData.name}!</span>
+      </div>
+    </header>
+  );
+}
 
 /**
  * Main App component
@@ -21,22 +57,7 @@ function App() {
     <AuthProvider>
       <UserProgressProvider>
         <div className="app-container">
-          <header className="app-header">
-            <div className="logo">
-              <h1>{config.app.name}</h1>
-            </div>
-            <nav className="main-nav">
-              <ul>
-                <li><a href="/">Dashboard</a></li>
-                <li><a href="/modules">Modules</a></li>
-                <li><a href="/practice">Practice</a></li>
-                <li><a href="/news">News</a></li>
-              </ul>
-            </nav>
-            <div className="user-menu">
-              <span className="user-greeting">Welcome, {userData.name}!</span>
-            </div>
-          </header>
+          <Header />
           
           <main className="app-content">
             {/* Demo mode alert */}
