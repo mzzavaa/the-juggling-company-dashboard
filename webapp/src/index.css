@@ -1,24 +1,24 @@
 /* Base styles */
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --accent-color: #e74c3c;
+  --primary-color: #2f6398;
+  --secondary-color: #3ea075;
+  --accent-color: #b74047;
   --background-color: #f8f9fa;
   --card-background: #ffffff;
   --text-color: #333333;
-  --border-color: #e1e1e1;
+  --border-color: #e2c293;
   --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Dark mode variables */
 .dark-mode {
-  --primary-color: #2980b9;
-  --secondary-color: #27ae60;
-  --accent-color: #c0392b;
+  --primary-color: #2f6398;
+  --secondary-color: #3ea075;
+  --accent-color: #b74047;
   --background-color: #121212;
   --card-background: #1e1e1e;
   --text-color: #f5f5f5;
-  --border-color: #333333;
+  --border-color: #e2c293;
   --shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -149,7 +149,7 @@ body {
 }
 
 .view-button:hover {
-  background-color: #2980b9;
+  background-color: #2f6398;
 }
 
 /* News cards */
@@ -349,7 +349,7 @@ body {
   padding: 1rem;
   border: 1px solid var(--accent-color);
   border-radius: 4px;
-  background-color: rgba(231, 76, 60, 0.1);
+  background-color: rgba(183, 64, 71, 0.1);
 }
 
 /* Page placeholders */
